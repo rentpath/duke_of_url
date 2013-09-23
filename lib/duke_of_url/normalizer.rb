@@ -21,10 +21,12 @@ module DukeOfUrl
     end
 
     def normalize
+      return url if url.blank?
+
       modified_url           = ::PostRank::URI.clean url
       (modified_url, params) = modified_url.split(PARAMS_SEPARATOR)
-      alphabetized_params    = alphabetize_params params
-      [modified_url, alphabetized_params].join(QUESTION_MARK)
+      alphabetized_params    = alphabetize_params(params) if params
+      [modified_url, alphabetized_params].compact.join(QUESTION_MARK)
     end
 
     private
@@ -38,7 +40,7 @@ module DukeOfUrl
             result
           end
 
-        param_string = params
+        params
           .keys
           .sort
           .map { |key| "#{key}=#{params[key]}" }
