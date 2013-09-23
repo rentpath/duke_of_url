@@ -1,3 +1,5 @@
+SPEC_DIR = File.dirname __FILE__
+
 require 'rubygems'
 require 'bundler/setup'
 require 'bogus/rspec'
@@ -13,8 +15,7 @@ SimpleCov.start do
   add_filter '/patches/'
 end
 
-spec_dir = File.dirname __FILE__
-Dir.glob("#{spec_dir}/support/**/*.rb").each {|f| require f}
+Dir.glob("#{SPEC_DIR}/support/**/*.rb").each {|f| require f}
 
 RSpec.configure do |config|
   config.include FactoryGirl::Syntax::Methods
@@ -23,4 +24,3 @@ end
 Bogus.configure do |c|
   c.search_modules << DukeOfUrl
 end
-
