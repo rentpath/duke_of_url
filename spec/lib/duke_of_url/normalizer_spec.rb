@@ -3,12 +3,12 @@ require 'spec_helper'
 module DukeOfUrl
   describe Normalizer do
     describe 'Alphabetizes URL parameters' do
-      it 'works with homogeneous case' do
+      it 'works with homogeneous capitalization of param names' do
         url = 'example.com?z=26&a=1'
         expect(described_class.normalize url).to include('?a=1&z=26')
       end
 
-      it 'works with heterogeneous case' do
+      it 'works with heterogeneous capitalization of param names' do
         url = 'example.com?Z=26&a=1&Y=25'
         expect(described_class.normalize url).to include('Y=25&Z=26&a=1')
       end
@@ -20,13 +20,13 @@ module DukeOfUrl
       end
     end
 
-    describe 'Downcases URLs' do
+    describe 'Downcases domain name portion of URL' do
       let(:url) { 'ExAMpLe.oRg'}
 
       it { expect(described_class.normalize url).to eq('http://example.org/') }
     end
 
-    describe 'Does not downcase paths' do
+    describe 'Does not downcase path elements in URL' do
       let(:url) { 'ExAMpLe.oRg/A/b/C'}
 
       it { expect(described_class.normalize url).to eq('http://example.org/A/b/C') }
@@ -38,7 +38,7 @@ module DukeOfUrl
       end
 
       it 'URL is blank' do
-        expect(described_class.normalize nil).to eq('')
+        expect(described_class.normalize '').to eq('')
       end
     end
   end
