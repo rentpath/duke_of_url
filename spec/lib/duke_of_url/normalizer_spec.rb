@@ -18,6 +18,12 @@ module DukeOfUrl
         expect(described_class.normalize url).to include('Y=25&Z=26&a=1')
         expect(described_class.normalize url).to_not include('/?')
       end
+
+      it 'considers trailing slash to be a different URL' do
+        url1 = described_class.normalize 'example.com'
+        url2 = described_class.normalize 'example.com/'
+        expect(url1).to_not eq(url2)
+      end
     end
 
     describe 'Downcases domain name portion of URL' do
