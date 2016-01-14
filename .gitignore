@@ -1,6 +1,7 @@
 *.rbc
 .bundle
 .config
+.idea/
 .yardoc
 InstalledFiles
 _yardoc
