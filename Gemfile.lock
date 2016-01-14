@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    duke_of_url (0.0.1)
+    duke_of_url (0.0.2)
       activesupport
       hashie
       postrank-uri
